@@ -41,8 +41,8 @@ Follow these steps to set up and run the project on your local machine.
 
 First, clone the project repository to your local machine:
 ```bash
-git clone <your-repository-url>
-cd <your-repository-name>
+git clone https://github.com/chetana1410/startup-ecosystem-rag.git
+cd startup-ecosystem-rag
 ```
 
 ### 3. Download the Local LLM
@@ -60,12 +60,12 @@ This project uses Poetry for dependency management. If you don't have it, run th
 
 **Linux, macOS, Windows (WSL):**
 ```bash
-curl -sSL [https://install.python-poetry.org](https://install.python-poetry.org) | python3 -
+curl -sSL https://install.python-poetry.org | python3 -
 ```
 
 **Windows (PowerShell):**
 ```bash
-(Invoke-WebRequest -Uri [https://install.python-poetry.org](https://install.python-poetry.org) -UseBasicParsing).Content | py -
+(Invoke-WebRequest -Uri https://install.python-poetry.org -UseBasicParsing).Content | py -
 ```
 Verify the installation by running ``poetry --version``.
 
@@ -89,34 +89,16 @@ eval $(poetry env activate)
 
 **1. Prepare Your Data**
 
-- Create a folder named ``data`` in the root of the project directory.
-```bash
-mkdir data
-```
-
-- Place all your documents (``.pdf, .txt, .md,`` etc.) inside this ``data`` folder.
-
-The application will automatically create a ``vector_data`` folder to store the database on its first run.
+Sample documents are already in ``data/``. To use your own, replace those files with ``.pdf``, ``.txt``, or ``.md`` files. The first ingest writes a local ``vector_data/`` index, which is gitignored.
 
 **2. Ingest Your Documents (First-Time Setup)**
 
-To have EcoAI process your documents and build its knowledge base, you need to run the ingestion pipeline once.
-
-1. Open the app.py file in the root directory.
-
-2. Find the line: app = StreamlitApp(load_docs=False)
-
-3. Change it to: app = StreamlitApp(load_docs=True)
-
-4. Save the file and run the application once from your terminal:
 ```bash
 poetry shell
-streamlit run app.py
+LOAD_DOCS=1 streamlit run app.py
 ```
 
-5. This will trigger the data loading process. You will see progress bars in your terminal as it processes the files.
-
-6. **IMPORTANT:** After the process is complete and the app is running, stop the app (Ctrl+C in the terminal) and change the line in app.py back to app = StreamlitApp(load_docs=False). This prevents the app from re-processing the same files every time it starts
+Stop the app after the progress bars finish. Later runs should omit ``LOAD_DOCS`` so the index is reused.
 
 **3. Launch the Application**
 

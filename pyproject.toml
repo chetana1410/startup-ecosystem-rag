@@ -1,11 +1,11 @@
 [tool.poetry]
 name = "EcoAI"
 version = "0.1.0"
-description = "EcoAI is an innovative, cutting-edge chatbot designed to facilitate seamless interactions between users and their data."
-authors = ["Atharva Mashalkar <atharvam212@gmail.com>"]
+description = "Two-level retrieval over a document corpus: proposition search, then an agentic rerank."
+authors = ["Chetana Tanmayee <chetanatanmayee@gmail.com>"]
 license = "MIT"
 readme = "README.md"
-packages = [{include = "ecoai"}]
+packages = [{include = "source"}]
 
 [tool.poetry.dependencies]
 python = ">=3.11,<4.0"
